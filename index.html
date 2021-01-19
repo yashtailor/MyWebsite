@@ -9,6 +9,29 @@
   .hero{
     background-color: #2c2725!important;
   }
+  a.navbar-item:hover{
+    background-color: #00D1B2 !important;
+    color:white !important;
+  }
+  .circle-signal{
+    height: 3rem;
+    width: 3rem;
+    background-color: darkmagenta;
+    border-radius: 50%;
+    margin: 1rem;
+  }
+  #web-dev:hover{
+    box-shadow:
+    0 0 30px 20px #fff,
+    0 0 60px 40px orange,
+    0 0 90px 60px orangered;
+  }
+  #barclays:hover{
+    box-shadow:
+    0 0 30px 20px #fff,
+    0 0 60px 40px #007ee5,
+    0 0 90px 60px darkblue;
+  }
 #myContainer {
   width: 1600px;
   height: 900px;
@@ -32,12 +55,31 @@
     window.open(link);
     ev.stopPropagation();
   }
+  function showArticle(name,ev){
+    if(name=='web-dev'){
+      document.getElementById('web-dev-article').style.display = '';
+      document.getElementById('barclays-article').style.display = 'none';
+      document.getElementById('general-article').style.display = 'none';
+    }else if(name == 'barclays'){
+      document.getElementById('web-dev-article').style.display = 'none';
+      document.getElementById('barclays-article').style.display = '';
+      document.getElementById('general-article').style.display = 'none';
+    }
+    ev.stopPropagation();
+  }
+  function goTo(idx){
+    const block = '#block'+String(idx);
+    document.querySelector(block).scrollIntoView({
+        behavior: "smooth"
+    });
+    e.stopPropagation();
+  }
 </script>
 <body>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
-        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+      <a class="navbar-item" href="https://yashtailor.netlify.app">
+        <b style="color: #00D1B2; font-size: 1.5rem;">Yash Tailor</b>
       </a>
   
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -49,47 +91,32 @@
   
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item">
-          Home
+        <a class="navbar-item" onclick="goTo(1)">
+          Ssup?
         </a>
   
-        <a class="navbar-item">
-          Documentation
+        <a class="navbar-item" onclick="goTo(3)">
+          Projects
         </a>
   
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            More
-          </a>
-  
-          <div class="navbar-dropdown">
-            <a class="navbar-item">
-              About
-            </a>
-            <a class="navbar-item">
-              Jobs
-            </a>
-            <a class="navbar-item">
-              Contact
-            </a>
-            <hr class="navbar-divider">
-            <a class="navbar-item">
-              Report an issue
-            </a>
-          </div>
-        </div>
+        <a class="navbar-item" onclick="goTo(5)">
+          Internships
+        </a>
+
+        <a class="navbar-item" onclick="goTo(7)">
+          Leadership
+        </a>
+
+        <a class="navbar-item" onclick="goTo(9)">
+          Connect
+        </a>
       </div>
   
       <div class="navbar-end">
         <div class="navbar-item">
-          <div class="buttons">
-            <a class="button is-primary">
-              <strong>Sign up</strong>
-            </a>
-            <a class="button is-light">
-              Log in
-            </a>
-          </div>
+          <a class="button is-primary">
+            <strong>Thought of Day</strong>
+          </a>
         </div>
       </div>
     </div>
@@ -122,8 +149,9 @@
       <img src="my_img.jpg" alt="" style="border: 5px solid white;;">
     </div>
     <div class="column is-two-thirds">
-      <h1>Yash Tailor</h1>
-      <p style="font-size: 2rem;">Hey! I am Yash Tailor, passionate, tech enthusiast who loves both development and
+      <h1 style="color: #3d3d3e;"><b>>Yash Tailor</b></h1>
+      <p style="font-size: 2rem; background-color: 
+      #3d3d3e; padding: 1rem; border-radius: 1em;">Hey! I am Yash Tailor, passionate, tech enthusiast who loves both development and
         competitive programming. I am currently pursuing my B TECH in Computer Engineering from
         VJTI,Mumbai.I am currently exploring ML. An Incoming Summer Analyst at Barclays. 
       </p>
@@ -245,9 +273,49 @@
     </div>
   </div>
 </section>
-<div onclick="go_back()" style="height: 500px; width:1600px; background-color: #ff498b;color:white;font-size: 50px;" id="block5">
+<div onclick="go_back()" style="height:500px; background-color: #ff498b;color:white;font-size: 50px;" id="block5">
     <!-- <button onclick="go_back()">Go Back</button> -->
-    THIS IS THE INTERNSHIPS/EXP
+    <div class="column is-one-third">
+      <div style="background-color: #0c0c0c;border:5px solid white;border-radius: 0.5em;margin-top:0.5em;margin-left: 0.5em;margin-right: 0.5em;">
+        <span class="button circle-signal" id="web-dev" style="background-color: orange;" onclick="showArticle('web-dev',event)"></span><span>Web Dev</span><br>
+        <span class="button circle-signal" id="barclays" style="background-color: #007ee5;" onclick="showArticle('barclays',event)"></span><span>Barclays</span><br>
+      </div>
+      <div style="text-align: center; padding: 0px;">
+        <span style="background-color:#0c0c0c;color:#0c0c0c;font-size: 200px; line-height: 1.35em; border:5px solid white;">|</span>
+      </div>
+    </div>
+    <div class="column is-half" style="margin-top: 1em;">
+      <article class="message is-dark" style="margin: 0.5em;" id="general-article">
+        <div class="message-header">
+          <p>Internships</p>
+          <button class="delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body">
+          All the Internships Experience!
+        </div>
+      </article>
+      <article class="message is-warning" style="margin: 0.5em;display: none;" id="web-dev-article">
+        <div class="message-header">
+          <p>Web Dev Internship</p>
+          <button class="delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body">
+          Made a site like google forms but the view to make surveys more quicker and efficient.
+          I handled the backend of the entire web app made in nodejs and adding vuejs frotend functionalities.
+          I learned a lot about patience, team work and being extremely clear of what we are supposed to 
+          implement.
+        </div>
+      </article>
+      <article class="message is-info" style="margin: 0.5em;display: none;" id="barclays-article">
+        <div class="message-header">
+          <p>Barclays Internship</p>
+          <button class="delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body">
+          Internship in the summer :) Keep in touch :)
+        </div>
+      </article>
+    </div>
 </div>
 <section class="hero is-primary">
   <div class="hero-body">
@@ -262,7 +330,7 @@
     </div>
   </div>
 </section>
-<div onclick="go_back()" style="height: max-content ; widows: 1600px; background-color:#f89747;color:black;font-size: 50px;" id="block7">
+<div onclick="go_back()" style="height: max-content ; background-color:#f89747;color:black;font-size: 50px;" id="block7">
     <!-- <button onclick="go_back()">Go Back</button> -->
     <div class="timeline2">
       <div class="container2 left2">
@@ -458,8 +526,8 @@ function go_back(){
   white-space: nowrap;
   display: inline-block;
   position: relative;
-  animation-duration: 20s;
-  animation-timing-function: steps(25, end);
+  animation-duration:10s;
+  animation-timing-function: steps(15, end);
   animation-iteration-count: infinite;
 }
 
